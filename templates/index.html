@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Plant Disease Detection</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #56ab2f, #a8e063);
+            text-align: center;
+            color: #333;
+        }
+
+        .container {
+            background: white;
+            width: 400px;
+            margin: 100px auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        input[type="file"] {
+            margin: 15px 0;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #219150;
+        }
+
+        img {
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .healthy {
+            color: green;
+        }
+
+        .diseased {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>🌿 Plant Disease Detection</h2>
+
+        <form action="/predict" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" required><br>
+            <input type="submit" value="Predict">
+        </form>
+
+        {% if prediction %}
+            <div class="result 
+                {% if prediction == 'Healthy' %}healthy{% else %}diseased{% endif %}">
+                Prediction: {{ prediction }}
+            </div>
+
+            <img src="{{ url_for('static', filename=img_path) }}" width="250">
+        {% endif %}
+    </div>
+
+</body>
+</html>
