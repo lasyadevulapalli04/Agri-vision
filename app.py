@@ -30,6 +30,8 @@ def predict():
 
         prediction = model.predict(img_array, verbose=0)
 
+        print("Prediction value:", prediction[0][0])
+
         if prediction[0][0] > 0.5:
             result = "Healthy"
         else:

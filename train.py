@@ -15,7 +15,8 @@ test_path = 'dataset/test'
 
 train_datagen = ImageDataGenerator(
     rescale=1./255,
-    rotation_range=10,
+    rotation_range=20,
+    zoom_range=0.2,
     horizontal_flip=True
 )
 
@@ -43,8 +44,11 @@ model = Sequential([
     Conv2D(64, (3,3), activation='relu'),
     MaxPooling2D(2,2),
 
+    Conv2D(128, (3,3), activation='relu'),
+    MaxPooling2D(2,2),
+
     Flatten(),
-    Dense(64, activation='relu'),
+    Dense(128, activation='relu'),
     Dense(1, activation='sigmoid')
 ])
 
@@ -56,7 +60,7 @@ model.compile(
 
 model.fit(
     train_data,
-    epochs=10,
+    epochs=25,
     validation_data=test_data,
     verbose=1
 )

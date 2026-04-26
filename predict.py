@@ -6,7 +6,7 @@ import numpy as np
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 
-model = load_model('model.keras')
+model = load_model('model.h5')
 
 img_name = sys.argv[1]
 
@@ -20,7 +20,7 @@ img_array = img_array / 255.0
 
 prediction = model.predict(img_array, verbose=0)
 
-print("Raw prediction value:", prediction)
+print("Prediction value:", prediction[0][0])
 
 if prediction[0][0] > 0.5:
     print("Prediction: Healthy")
